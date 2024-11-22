@@ -10,7 +10,7 @@ const ParticlesComponent = () => {
   const [images, setImages] = useState({});
   const canvasRef = useRef(null);
   const particles = useRef([]);
-  const numParticles = 100;
+  const numParticles = 160;
   const center = useRef({ x: 0, y: 0 });
   const circleRadius = useRef(0);
 
@@ -104,38 +104,55 @@ const ParticlesComponent = () => {
 
   const draw = (p5) => {
     p5.clear();
-
+  
     // Gambar lingkaran batas
     p5.noFill();
     p5.stroke(255, 255, 255, 100);
     p5.strokeWeight(2);
     p5.circle(center.current.x, center.current.y, circleRadius.current * 2);
-
+  
+    // Partikel
     particles.current.forEach((particle) => {
       particle.update();
       particle.display(p5);
     });
-
+  
+    // Filter elemen yang keluar dari lingkaran
+    setDroppedItems((prev) =>
+      prev.filter((item) => {
+        const distanceFromCenter = Math.sqrt(
+          Math.pow(item.x - center.current.x, 2) +
+            Math.pow(item.y - center.current.y, 2)
+        );
+        return distanceFromCenter <= circleRadius.current;
+      })
+    );
+  
+    // Gambar elemen yang tersisa
     droppedItems.forEach((item, index) => {
       const image = images[item.type];
       if (image) {
         p5.image(image, item.x - 15, item.y - 15, 30, 30);
-
-        // Tambahkan area draggable pada bola
-        const dragElement = document.createElement("div");
-        dragElement.draggable = true;
-        dragElement.style.position = "absolute";
-        dragElement.style.left = `${item.x}px`;
-        dragElement.style.top = `${item.y}px`;
-        dragElement.style.width = "30px";
-        dragElement.style.height = "30px";
-        dragElement.ondragstart = (e) => handleItemDragStart(e, index);
-        dragElement.ondrop = handleItemDrop;
-        dragElement.style.cursor = "grab";
-        document.body.appendChild(dragElement);
+  
+        // Deteksi klik dan drag ulang
+        const distance = Math.sqrt(
+          Math.pow(p5.mouseX - item.x, 2) + Math.pow(p5.mouseY - item.y, 2)
+        );
+  
+        if (distance < 15 && p5.mouseIsPressed) {
+          const newOffsetX = p5.mouseX;
+          const newOffsetY = p5.mouseY;
+  
+          setDroppedItems((prev) =>
+            prev.map((el, i) =>
+              i === index ? { ...el, x: newOffsetX, y: newOffsetY } : el
+            )
+          );
+        }
       }
     });
   };
+  
 
   const windowResized = (p5) => {
     p5.resizeCanvas(p5.windowWidth, p5.windowHeight * 0.5);
@@ -158,8 +175,8 @@ const ParticlesComponent = () => {
       this.centerY = centerY;
       this.orbitRadius = orbitRadius;
       this.angle = angle;
-      this.angleSpeed = p5.random(0.002, 0.004);
-      this.size = p5.random(5, 10);
+      this.angleSpeed = p5.random(0.0005, 0.0001);
+      this.size = p5.random(10, 10);
     }
 
     update() {
