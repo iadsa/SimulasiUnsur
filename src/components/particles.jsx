@@ -43,6 +43,51 @@ const ParticlesComponent = () => {
     const offsetX = e.clientX - canvasBounds.left;
     const offsetY = e.clientY - canvasBounds.top;
 
+    const distanceFromCenter = Math.sqrt(
+      Math.pow(offsetX - center.current.x, 2) +
+        Math.pow(offsetY - center.current.y, 2)
+    );
+
+    // Logika untuk Proton dan Neutron
+    if (data === "proton" || data === "neutron") {
+      if (distanceFromCenter > circleRadius.current / 2) {
+        return; // Proton/Neutron hanya boleh di pusat lingkaran
+      }
+    }
+
+    // Logika untuk Elektron
+    if (data === "elektron") {
+      const orbitRadii = [
+        circleRadius.current, // Lingkaran luar
+        circleRadius.current * 0.75, // Lingkaran medium
+        circleRadius.current * 0.5, // Lingkaran kecil
+      ];
+
+      let closestRadius = orbitRadii[0];
+      orbitRadii.forEach((radius) => {
+        if (
+          Math.abs(distanceFromCenter - radius) <
+          Math.abs(distanceFromCenter - closestRadius)
+        ) {
+          closestRadius = radius;
+        }
+      });
+
+      const angle = Math.atan2(
+        offsetY - center.current.y,
+        offsetX - center.current.x
+      );
+      const snappedX = center.current.x + closestRadius * Math.cos(angle);
+      const snappedY = center.current.y + closestRadius * Math.sin(angle);
+
+      setDroppedItems((prev) => [
+        ...prev,
+        { type: data, x: snappedX, y: snappedY },
+      ]);
+      return;
+    }
+
+    // Tambahkan Proton atau Neutron
     setDroppedItems((prev) => [
       ...prev,
       { type: data, x: offsetX, y: offsetY },
@@ -50,12 +95,12 @@ const ParticlesComponent = () => {
   };
 
   const handleItemDragStart = (e, index) => {
-    e.dataTransfer.setData("index", index);
+    e.dataTransfer.setData("index", index); // Simpan indeks elemen yang sedang diseret
   };
 
   const handleItemDrop = (e) => {
     e.preventDefault();
-    const index = e.dataTransfer.getData("index");
+    const index = e.dataTransfer.getData("index"); // Ambil elemen yang sedang diseret
     const canvasBounds = canvasRef.current.getBoundingClientRect();
     const offsetX = e.clientX - canvasBounds.left;
     const offsetY = e.clientY - canvasBounds.top;
@@ -65,16 +110,16 @@ const ParticlesComponent = () => {
         Math.pow(offsetY - center.current.y, 2)
     );
 
-    if (distanceFromCenter <= circleRadius.current) {
-      // Jika berada di dalam lingkaran, perbarui posisi
+    if (distanceFromCenter > circleRadius.current) {
+      // Jika elemen diseret keluar lingkaran, hapus elemen tersebut
+      setDroppedItems((prev) => prev.filter((_, i) => i !== Number(index)));
+    } else {
+      // Perbarui posisi elemen di dalam lingkaran
       setDroppedItems((prev) =>
         prev.map((item, i) =>
           i === Number(index) ? { ...item, x: offsetX, y: offsetY } : item
         )
       );
-    } else {
-      // Jika berada di luar lingkaran, hapus elemen
-      setDroppedItems((prev) => prev.filter((_, i) => i !== Number(index)));
     }
   };
 
@@ -96,7 +141,13 @@ const ParticlesComponent = () => {
         const orbitRadius = p5.random(100, circleRadius.current);
         const angle = p5.random(p5.TWO_PI);
         particles.current.push(
-          new Particle(p5, center.current.x, center.current.y, orbitRadius, angle)
+          new Particle(
+            p5,
+            center.current.x,
+            center.current.y,
+            orbitRadius,
+            angle
+          )
         );
       }
     }
@@ -104,106 +155,45 @@ const ParticlesComponent = () => {
 
   const draw = (p5) => {
     p5.clear();
-  
-    // Gambar lingkaran batas (lingkaran terluar)
+
+    // Gambar lingkaran batas
     p5.noFill();
     p5.stroke(255, 255, 255, 100);
     p5.strokeWeight(2);
     p5.circle(center.current.x, center.current.y, circleRadius.current * 2);
-  
+
     // Lingkaran medium
-    p5.stroke(200, 200, 200, 100); // Warna lingkaran medium sedikit lebih gelap
+    p5.stroke(200, 200, 200, 100);
     p5.circle(center.current.x, center.current.y, circleRadius.current * 1.5);
-  
+
     // Lingkaran kecil
-    p5.stroke(150, 150, 150, 100); // Warna lingkaran kecil lebih gelap lagi
+    p5.stroke(150, 150, 150, 100);
     p5.circle(center.current.x, center.current.y, circleRadius.current);
-  
-    // Partikel
+
+    // Partikel animasi
     particles.current.forEach((particle) => {
       particle.update();
       particle.display(p5);
     });
 
-    setDroppedItems((prev) =>
-  prev.filter((item) => {
-    const distanceFromCenter = Math.sqrt(
-      Math.pow(item.x - center.current.x, 2) +
-      Math.pow(item.y - center.current.y, 2)
-    );
-
-    // Gambar elemen yang sudah ditambahkan
-  droppedItems.forEach((item) => {
-    const image = images[item.type];
-    if (image) {
-      // Tampilkan gambar elemen
-      p5.image(image, item.x - 15, item.y - 15, 30, 30);
-    }
-  });
-
-  // Tampilkan efek tumpukan jika elemen bertumpuk
-  droppedItems.forEach((item, index) => {
-    const overlappedItems = droppedItems.filter(
-      (other, i) =>
-        i !== index &&
-        Math.abs(item.x - other.x) < 30 &&
-        Math.abs(item.y - other.y) < 30
-    );
-
-    if (overlappedItems.length > 0) {
-      // Tambahkan transparansi pada gambar elemen
-      p5.tint(255, 150); // Transparansi 150 dari 255
-      const image = images[item.type];
-      if (image) {
-        p5.image(image, item.x - 15, item.y - 15, 30, 30);
-      }
-      p5.noTint(); // Reset transparansi
-    }
-  });
-
-    // Validasi akses partikel berdasarkan lingkaran
-    if (item.type === "elektron") {
-      // Elektron dan Proton hanya boleh di lingkaran medium dan terluar
-      return distanceFromCenter > circleRadius.current;
-    } else if (item.type === "neutron" || item.type === "proton") {
-      // Neutron hanya boleh di lingkaran kecil
-      return distanceFromCenter <= circleRadius.current;
-    }
-
-   
-
-    // Jika tipe tidak dikenali, hapus
-    return false;
-  })
-);
-
-  
-    // Gambar elemen yang tersisa
+    // Gambar elemen yang telah dijatuhkan
     droppedItems.forEach((item, index) => {
       const image = images[item.type];
       if (image) {
         p5.image(image, item.x - 15, item.y - 15, 30, 30);
-  
-        // Deteksi klik dan drag ulang
-        const distance = Math.sqrt(
-          Math.pow(p5.mouseX - item.x, 2) + Math.pow(p5.mouseY - item.y, 2)
-        );
-  
-        if (distance < 15 && p5.mouseIsPressed) {
-          const newOffsetX = p5.mouseX;
-          const newOffsetY = p5.mouseY;
-  
-          setDroppedItems((prev) =>
-            prev.map((el, i) =>
-              i === index ? { ...el, x: newOffsetX, y: newOffsetY } : el
-            )
-          );
-        }
+        p5.canvas.addEventListener("mousedown", (event) => {
+          if (
+            event.offsetX >= item.x - 15 &&
+            event.offsetX <= item.x + 15 &&
+            event.offsetY >= item.y - 15 &&
+            event.offsetY <= item.y + 15
+          ) {
+            handleItemDragStart(event, index);
+          }
+        });
       }
     });
   };
-  
-  
 
   const windowResized = (p5) => {
     p5.resizeCanvas(p5.windowWidth, p5.windowHeight * 0.5);

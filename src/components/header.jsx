@@ -31,10 +31,11 @@ const Header = () => {
         <img
           src={atomImage}
           alt="Atom"
-          className="w-24 h-24 animate-spin"
+          className="w-15 h-15 animate-spin"
           style={{
-            animationDuration: "3s",
+            animationDuration: "20s",
             animationTimingFunction: "linear",
+            
           }}
         />
       </div>
