@@ -105,28 +105,78 @@ const ParticlesComponent = () => {
   const draw = (p5) => {
     p5.clear();
   
-    // Gambar lingkaran batas
+    // Gambar lingkaran batas (lingkaran terluar)
     p5.noFill();
     p5.stroke(255, 255, 255, 100);
     p5.strokeWeight(2);
     p5.circle(center.current.x, center.current.y, circleRadius.current * 2);
+  
+    // Lingkaran medium
+    p5.stroke(200, 200, 200, 100); // Warna lingkaran medium sedikit lebih gelap
+    p5.circle(center.current.x, center.current.y, circleRadius.current * 1.5);
+  
+    // Lingkaran kecil
+    p5.stroke(150, 150, 150, 100); // Warna lingkaran kecil lebih gelap lagi
+    p5.circle(center.current.x, center.current.y, circleRadius.current);
   
     // Partikel
     particles.current.forEach((particle) => {
       particle.update();
       particle.display(p5);
     });
-  
-    // Filter elemen yang keluar dari lingkaran
+
     setDroppedItems((prev) =>
-      prev.filter((item) => {
-        const distanceFromCenter = Math.sqrt(
-          Math.pow(item.x - center.current.x, 2) +
-            Math.pow(item.y - center.current.y, 2)
-        );
-        return distanceFromCenter <= circleRadius.current;
-      })
+  prev.filter((item) => {
+    const distanceFromCenter = Math.sqrt(
+      Math.pow(item.x - center.current.x, 2) +
+      Math.pow(item.y - center.current.y, 2)
     );
+
+    // Gambar elemen yang sudah ditambahkan
+  droppedItems.forEach((item) => {
+    const image = images[item.type];
+    if (image) {
+      // Tampilkan gambar elemen
+      p5.image(image, item.x - 15, item.y - 15, 30, 30);
+    }
+  });
+
+  // Tampilkan efek tumpukan jika elemen bertumpuk
+  droppedItems.forEach((item, index) => {
+    const overlappedItems = droppedItems.filter(
+      (other, i) =>
+        i !== index &&
+        Math.abs(item.x - other.x) < 30 &&
+        Math.abs(item.y - other.y) < 30
+    );
+
+    if (overlappedItems.length > 0) {
+      // Tambahkan transparansi pada gambar elemen
+      p5.tint(255, 150); // Transparansi 150 dari 255
+      const image = images[item.type];
+      if (image) {
+        p5.image(image, item.x - 15, item.y - 15, 30, 30);
+      }
+      p5.noTint(); // Reset transparansi
+    }
+  });
+
+    // Validasi akses partikel berdasarkan lingkaran
+    if (item.type === "elektron") {
+      // Elektron dan Proton hanya boleh di lingkaran medium dan terluar
+      return distanceFromCenter > circleRadius.current;
+    } else if (item.type === "neutron" || item.type === "proton") {
+      // Neutron hanya boleh di lingkaran kecil
+      return distanceFromCenter <= circleRadius.current;
+    }
+
+   
+
+    // Jika tipe tidak dikenali, hapus
+    return false;
+  })
+);
+
   
     // Gambar elemen yang tersisa
     droppedItems.forEach((item, index) => {
@@ -152,6 +202,7 @@ const ParticlesComponent = () => {
       }
     });
   };
+  
   
 
   const windowResized = (p5) => {
