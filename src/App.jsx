@@ -1,7 +1,7 @@
 import React from "react";
 import ParticlesComponent from "./components/particles.jsx";
 import DragDropComponent from "./components/dragdrop.jsx";
-import Header from "./components/Header.jsx";
+import Header from "./components/header.jsx";
 
 function App() {
   return (

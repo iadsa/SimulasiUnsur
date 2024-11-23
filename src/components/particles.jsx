@@ -7,6 +7,7 @@ import wadahImg from "../assets/wadah.png";
 
 const ParticlesComponent = () => {
   const [droppedItems, setDroppedItems] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
   const [images, setImages] = useState({});
   const canvasRef = useRef(null);
   const particles = useRef([]);
@@ -121,7 +122,19 @@ const ParticlesComponent = () => {
         )
       );
     }
+
+    if (
+      Math.sqrt(
+        Math.pow(newX - center.current.x, 2) + Math.pow(newY - center.current.y, 2)
+      ) > circleRadius.current
+    ) {
+      setDroppedItems((prev) => prev.filter((_, i) => i !== selectedItem.index));
+      setSelectedItem(null);
+    }
+    
   };
+
+  
 
   const onDragStart = (e, itemType) => {
     e.dataTransfer.setData("item", itemType);
@@ -176,24 +189,62 @@ const ParticlesComponent = () => {
       particle.display(p5);
     });
 
+   
     // Gambar elemen yang telah dijatuhkan
-    droppedItems.forEach((item, index) => {
-      const image = images[item.type];
-      if (image) {
-        p5.image(image, item.x - 15, item.y - 15, 30, 30);
-        p5.canvas.addEventListener("mousedown", (event) => {
-          if (
-            event.offsetX >= item.x - 15 &&
-            event.offsetX <= item.x + 15 &&
-            event.offsetY >= item.y - 15 &&
-            event.offsetY <= item.y + 15
-          ) {
-            handleItemDragStart(event, index);
-          }
-        });
+  droppedItems.forEach((item, index) => {
+    const image = images[item.type];
+    if (image) {
+      p5.image(image, item.x - 15, item.y - 15, 30, 30);
+
+      // Periksa klik mouse pada elemen
+      if (
+        p5.mouseIsPressed &&
+        p5.mouseX >= item.x - 15 &&
+        p5.mouseX <= item.x + 15 &&
+        p5.mouseY >= item.y - 15 &&
+        p5.mouseY <= item.y + 15
+      ) {
+        setSelectedItem({ index, offsetX: p5.mouseX - item.x, offsetY: p5.mouseY - item.y });
       }
-    });
-  };
+    }
+  });
+
+  // Pada fungsi draw
+if (selectedItem) {
+  const { index, offsetX, offsetY } = selectedItem;
+  const newX = p5.mouseX - offsetX;
+  const newY = p5.mouseY - offsetY;
+
+  // Cek apakah elemen tetap di dalam lingkaran
+  const distanceFromCenter = Math.sqrt(
+    Math.pow(newX - center.current.x, 2) +
+    Math.pow(newY - center.current.y, 2)
+  );
+
+  if (distanceFromCenter <= circleRadius.current) {
+    // Update posisi elemen
+    setDroppedItems((prev) =>
+      prev.map((item, i) =>
+        i === index ? { ...item, x: newX, y: newY } : item
+      )
+    );
+  }
+}
+
+// Lepaskan elemen saat mouse dilepas
+if (!p5.mouseIsPressed && selectedItem) {
+  const { index, offsetX, offsetY } = selectedItem;
+  const releaseX = p5.mouseX - offsetX;
+  const releaseY = p5.mouseY - offsetY;
+
+  const distanceFromCenter = Math.sqrt(
+    Math.pow(releaseX - center.current.x, 2) +
+    Math.pow(releaseY - center.current.y, 2)
+  );
+
+  setSelectedItem(null);
+  }
+};
 
   const windowResized = (p5) => {
     p5.resizeCanvas(p5.windowWidth, p5.windowHeight * 0.5);
