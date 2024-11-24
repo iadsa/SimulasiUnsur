@@ -9,7 +9,7 @@ const CountAtom = ({ type, value, onUpdate }) => {
   };
 
   return (
-    <div className="flex flex-row items-center justify-center space-x-4">
+    <div className="flex flex-row items-center justify-center space-x-4 ">
       <div
         className="flex items-center justify-between bg-[#D9D9D9] rounded-lg"
         style={{ width: "136.49px", height: "33.28px" }}

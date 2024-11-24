@@ -5,6 +5,7 @@ import elektronImg from "../assets/elektron.png";
 import neutronImg from "../assets/neutron.png";
 import wadahImg from "../assets/wadah.png";
 import CountAtom from "./countatom";
+import Unsur from "../components/unsur";
 
 const ParticlesComponent = () => {
   const [droppedItems, setDroppedItems] = useState([]);
@@ -15,6 +16,15 @@ const ParticlesComponent = () => {
   const numParticles = 160;
   const center = useRef({ x: 0, y: 0 });
   const circleRadius = useRef(0);
+
+  const calculateAtomicNumber = () => {
+    return counts.proton; // Asumsikan nomor atom dihitung dari jumlah proton
+  };
+
+  const calculateMassNumber = () => {
+    // Mass number dihitung dengan jumlah proton dan neutron
+    return counts.proton + counts.neutron;
+  };
 
   const items = [
     { type: "proton", label: "Proton", img: protonImg },
@@ -404,22 +414,40 @@ const ParticlesComponent = () => {
 
   return (
     <div
-      className="relative w-full flex flex-col items-center justify-between min-h-[70vh] bg-gradient-to-r from-[#6EABBA] to-[#324D54]"
+      className="relative w-full flex flex-col items-center justify-between min-h-[70vh] bg-gradient-to-r from-[#6EABBA] to-[#324D54] mt-6 mb-8 overflow-hidden"
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
       {/* Partikel di tengah */}
       <Sketch setup={setup} draw={draw} windowResized={windowResized} />
 
+      {/* Kotak Unsur */}
+      <div
+        className="absolute top-1/4 right-24 transform -translate-y-1/2 -translate-x-24 border-2 rounded-lg mr-10 mb-10"
+        style={{
+          borderRadius: "15px",
+          boxShadow: "0 0 20px 5px #C0C0C0",
+        }}
+      >
+        <Unsur
+          atomicNumber={calculateAtomicNumber()}
+          massNumber={calculateMassNumber()}
+          electrons={counts.elektron}
+        />
+      </div>
+
       {/* Wadah Proton, Elektron, Neutron */}
       <div
-        className="absolute w-full flex justify-center bottom-1 space-x-10 "
+        className="absolute w-full flex justify-center bottom-1 space-x-10 mt-10"
         style={{
           zIndex: 0,
         }}
       >
         {items.map((item) => (
-          <div key={item.type} className="relative flex flex-col items-center">
+          <div
+            key={item.type}
+            className="relative flex flex-col items-center mt-4"
+          >
             <div
               style={{
                 width: "100px",
@@ -431,7 +459,7 @@ const ParticlesComponent = () => {
                 marginBottom: "20px",
               }}
             ></div>
-            <h2 className="text-white text-xl font-bold mb-4">{item.label}</h2>
+            <h2 className="text-white text-xl font-bold ">{item.label}</h2>
             {/* Tambahkan CountAtom di bawah elemen h2 */}
             <CountAtom
               type={item.type}
@@ -444,7 +472,7 @@ const ParticlesComponent = () => {
 
       {/* Elemen Proton, Elektron, dan Neutron */}
       <div
-        className="flex justify-center items-center center absolute gap-20 ml-14 mr-9 mb-2"
+        className="flex justify-center items-center center absolute gap-20 ml-14 mr-9 mb-1"
         style={{
           bottom: 110,
           zIndex: 1,
