@@ -23,6 +23,60 @@ const ParticlesComponent = () => {
     { type: "neutron", label: "Neutron", img: neutronImg },
   ];
 
+  const [counts, setCounts] = useState({
+    proton: 0,
+    neutron: 0,
+    elektron: 0,
+  });
+  
+  const handleUpdateCounts = (type, value) => {
+    setCounts((prev) => ({ ...prev, [type]: value }));
+  };
+  
+  useEffect(() => {
+    // Perbarui droppedItems untuk mencocokkan jumlah partikel
+    const updatedItems = [];
+  
+    // Tambahkan proton
+    for (let i = 0; i < counts.proton; i++) {
+      updatedItems.push({
+        type: "proton",
+        x: center.current.x + Math.random() * 20 - 10, // Posisi acak di pusat
+        y: center.current.y + Math.random() * 20 - 10,
+      });
+    }
+  
+    // Tambahkan neutron
+    for (let i = 0; i < counts.neutron; i++) {
+      updatedItems.push({
+        type: "neutron",
+        x: center.current.x + Math.random() * 20 - 10,
+        y: center.current.y + Math.random() * 20 - 10,
+      });
+    }
+  
+    // Tambahkan elektron
+    const orbitRadii = [
+      circleRadius.current,
+      circleRadius.current * 0.75,
+      circleRadius.current * 0.5,
+    ];
+  
+    for (let i = 0; i < counts.elektron; i++) {
+      const radius = orbitRadii[i % orbitRadii.length];
+      const angle = (Math.PI * 2 * i) / counts.elektron;
+      updatedItems.push({
+        type: "elektron",
+        x: center.current.x + radius * Math.cos(angle),
+        y: center.current.y + radius * Math.sin(angle),
+      });
+    }
+  
+    setDroppedItems(updatedItems);
+  }, [counts, center, circleRadius]);
+  
+
+
   useEffect(() => {
     const loadImages = (p5) => {
       setImages({
@@ -363,7 +417,9 @@ const ParticlesComponent = () => {
             ></div>
             <h2 className="text-white text-xl font-bold mb-4">{item.label}</h2>
             {/* Tambahkan CountAtom di bawah elemen h2 */}
-            <CountAtom  className="" onUpdate={(type, value) => console.log(`${type} updated to ${value}`)} />
+            <CountAtom
+            onUpdate={(type, value) => handleUpdateCounts(type, value)}
+                />
           </div>
         ))}
       </div>
