@@ -4,6 +4,8 @@ import protonImg from "../assets/proton.png";
 import elektronImg from "../assets/elektron.png";
 import neutronImg from "../assets/neutron.png";
 import wadahImg from "../assets/wadah.png";
+import CountAtom from "./countatom";
+
 
 const ParticlesComponent = () => {
   const [droppedItems, setDroppedItems] = useState([]);
@@ -52,6 +54,10 @@ const ParticlesComponent = () => {
     // Logika untuk Proton dan Neutron
     if (data === "proton" || data === "neutron") {
       if (distanceFromCenter > circleRadius.current / 2) {
+        // remove item from dropped items
+        console.log("REMOVING")
+        const updatedItems = droppedItems.filter((item) => item.type !== data);
+        setDroppedItems(updatedItems);
         return; // Proton/Neutron hanya boleh di pusat lingkaran
       }
     }
@@ -67,12 +73,20 @@ const ParticlesComponent = () => {
       let closestRadius = orbitRadii[0];
       orbitRadii.forEach((radius) => {
         if (
-          Math.abs(distanceFromCenter - radius) <
+          Math.abs(distanceFromCenter - radius) < 
           Math.abs(distanceFromCenter - closestRadius)
         ) {
           closestRadius = radius;
         }
       });
+
+      console.log({
+        closestRadius,
+        distanceFromCenter,
+        offsetX,
+        offsetY,
+        center: center.current
+      })
 
       const angle = Math.atan2(
         offsetY - center.current.y,
@@ -94,47 +108,6 @@ const ParticlesComponent = () => {
       { type: data, x: offsetX, y: offsetY },
     ]);
   };
-
-  const handleItemDragStart = (e, index) => {
-    e.dataTransfer.setData("index", index); // Simpan indeks elemen yang sedang diseret
-  };
-
-  const handleItemDrop = (e) => {
-    e.preventDefault();
-    const index = e.dataTransfer.getData("index"); // Ambil elemen yang sedang diseret
-    const canvasBounds = canvasRef.current.getBoundingClientRect();
-    const offsetX = e.clientX - canvasBounds.left;
-    const offsetY = e.clientY - canvasBounds.top;
-
-    const distanceFromCenter = Math.sqrt(
-      Math.pow(offsetX - center.current.x, 2) +
-        Math.pow(offsetY - center.current.y, 2)
-    );
-
-    if (distanceFromCenter > circleRadius.current) {
-      // Jika elemen diseret keluar lingkaran, hapus elemen tersebut
-      setDroppedItems((prev) => prev.filter((_, i) => i !== Number(index)));
-    } else {
-      // Perbarui posisi elemen di dalam lingkaran
-      setDroppedItems((prev) =>
-        prev.map((item, i) =>
-          i === Number(index) ? { ...item, x: offsetX, y: offsetY } : item
-        )
-      );
-    }
-
-    if (
-      Math.sqrt(
-        Math.pow(newX - center.current.x, 2) + Math.pow(newY - center.current.y, 2)
-      ) > circleRadius.current
-    ) {
-      setDroppedItems((prev) => prev.filter((_, i) => i !== selectedItem.index));
-      setSelectedItem(null);
-    }
-    
-  };
-
-  
 
   const onDragStart = (e, itemType) => {
     e.dataTransfer.setData("item", itemType);
@@ -189,67 +162,135 @@ const ParticlesComponent = () => {
       particle.display(p5);
     });
 
-   
-    // Gambar elemen yang telah dijatuhkan
-  droppedItems.forEach((item, index) => {
-    const image = images[item.type];
-    if (image) {
-      p5.image(image, item.x - 15, item.y - 15, 30, 30);
+    droppedItems.forEach((item, index) => {
+      const image = images[item.type];
+      if (image) {
+        p5.image(image, item.x - 15, item.y - 15, 30, 30);
 
-      // Periksa klik mouse pada elemen
-      if (
-        p5.mouseIsPressed &&
-        p5.mouseX >= item.x - 15 &&
-        p5.mouseX <= item.x + 15 &&
-        p5.mouseY >= item.y - 15 &&
-        p5.mouseY <= item.y + 15
-      ) {
-        setSelectedItem({ index, offsetX: p5.mouseX - item.x, offsetY: p5.mouseY - item.y });
+        // Periksa klik mouse pada elemen
+        if (
+          p5.mouseIsPressed &&
+          p5.mouseX >= item.x - 15 &&
+          p5.mouseX <= item.x + 15 &&
+          p5.mouseY >= item.y - 15 &&
+          p5.mouseY <= item.y + 15
+        ) {
+          setSelectedItem({ index, offsetX: p5.mouseX - item.x, offsetY: p5.mouseY - item.y });
+        }
+      }
+    });
+
+    // Pada fungsi draw
+    if (selectedItem) {
+      const { index, offsetX, offsetY } = selectedItem;
+      const newX = p5.mouseX - offsetX;
+      const newY = p5.mouseY - offsetY;
+
+      const item = droppedItems[index];
+      const distanceFromCenter = Math.sqrt(
+        Math.pow(newX - center.current.x, 2) +
+        Math.pow(newY - center.current.y, 2)
+      );
+
+      if (item.type === "proton" || item.type === "neutron") {
+        if (distanceFromCenter <= circleRadius.current / 2) {
+          setDroppedItems((prev) =>
+            prev.map((item, i) =>
+              i === index ? { ...item, x: newX, y: newY } : item
+            )
+          );
+        }
+      } else if (item.type === "elektron") {
+        const orbitRadii = [
+          circleRadius.current, // Lingkaran luar
+          circleRadius.current * 0.75, // Lingkaran medium
+          circleRadius.current * 0.5, // Lingkaran kecil
+        ];
+
+        let closestRadius = orbitRadii[0];
+        let minDistance = Math.abs(distanceFromCenter - closestRadius);
+
+        orbitRadii.forEach((radius) => {
+          const distance = Math.abs(distanceFromCenter - radius);
+          if (distance < minDistance) {
+            closestRadius = radius;
+            minDistance = distance;
+          }
+        });
+
+        const angle = Math.atan2(
+          newY - center.current.y,
+          newX - center.current.x
+        );
+        const snappedX = center.current.x + closestRadius * Math.cos(angle);
+        const snappedY = center.current.y + closestRadius * Math.sin(angle);
+
+        setDroppedItems((prev) =>
+          prev.map((item, i) =>
+            i === index ? { ...item, x: snappedX, y: snappedY } : item
+          )
+        );
       }
     }
-  });
 
-  // Pada fungsi draw
-if (selectedItem) {
-  const { index, offsetX, offsetY } = selectedItem;
-  const newX = p5.mouseX - offsetX;
-  const newY = p5.mouseY - offsetY;
-
-  // Cek apakah elemen tetap di dalam lingkaran
-  const distanceFromCenter = Math.sqrt(
-    Math.pow(newX - center.current.x, 2) +
-    Math.pow(newY - center.current.y, 2)
-  );
-
-  if (distanceFromCenter <= circleRadius.current) {
-    // Update posisi elemen
-    setDroppedItems((prev) =>
-      prev.map((item, i) =>
-        i === index ? { ...item, x: newX, y: newY } : item
-      )
-    );
-  }
-}
-
-// Lepaskan elemen saat mouse dilepas
-if (!p5.mouseIsPressed && selectedItem) {
-  const { index, offsetX, offsetY } = selectedItem;
-  const releaseX = p5.mouseX - offsetX;
-  const releaseY = p5.mouseY - offsetY;
-
-  const distanceFromCenter = Math.sqrt(
-    Math.pow(releaseX - center.current.x, 2) +
-    Math.pow(releaseY - center.current.y, 2)
-  );
-
-  setSelectedItem(null);
-  }
-};
-
+    // Lepaskan elemen saat mouse dilepas
+    if (!p5.mouseIsPressed && selectedItem) {
+      setSelectedItem(null);
+    }
+  };
+  
   const windowResized = (p5) => {
     p5.resizeCanvas(p5.windowWidth, p5.windowHeight * 0.5);
-    center.current = { x: p5.width / 2, y: p5.height / 2 };
-    circleRadius.current = Math.min(p5.width, p5.height) / 2.5;
+    const newCenter = { x: p5.width / 2, y: p5.height / 2 };
+    const newCircleRadius = Math.min(p5.width, p5.height) / 2.5;
+
+    // Update center and circle radius
+    center.current = newCenter;
+    circleRadius.current = newCircleRadius;
+
+    // Adjust positions of dropped items
+    setDroppedItems((prevItems) =>
+      prevItems.map((item) => {
+        const angle = Math.atan2(item.y - center.current.y, item.x - center.current.x);
+        const distanceFromCenter = Math.sqrt(
+          Math.pow(item.x - center.current.x, 2) +
+          Math.pow(item.y - center.current.y, 2)
+        );
+
+        let newX, newY;
+        if (item.type === "proton" || item.type === "neutron") {
+          newX = center.current.x + (distanceFromCenter / circleRadius.current) * newCircleRadius * Math.cos(angle);
+          newY = center.current.y + (distanceFromCenter / circleRadius.current) * newCircleRadius * Math.sin(angle);
+        } else if (item.type === "elektron") {
+          const orbitRadii = [
+            newCircleRadius, // Lingkaran luar
+            newCircleRadius * 0.75, // Lingkaran medium
+            newCircleRadius * 0.5, // Lingkaran kecil
+          ];
+
+          let closestRadius = orbitRadii[0];
+          let minDistance = Math.abs(distanceFromCenter - closestRadius);
+
+          orbitRadii.forEach((radius) => {
+            const distance = Math.abs(distanceFromCenter - radius);
+            if (distance < minDistance) {
+              closestRadius = radius;
+              minDistance = distance;
+            }
+          });
+
+          newX = center.current.x + closestRadius * Math.cos(angle);
+          newY = center.current.y + closestRadius * Math.sin(angle);
+        }
+
+        return { ...item, x: newX, y: newY };
+      })
+    );
+
+    particles.current.forEach((particle) => {
+      const newOrbitRadius = p5.random(100, circleRadius.current);
+      particle.updateProperties(center.current.x, center.current.y, newOrbitRadius);
+    });
   };
 
   useEffect(() => {
@@ -283,6 +324,12 @@ if (!p5.mouseIsPressed && selectedItem) {
       p5.fill(255, 255, 255, 200);
       p5.circle(x, y, this.size);
     }
+
+    updateProperties(centerX, centerY, orbitRadius) {
+      this.centerX = centerX;
+      this.centerY = centerY;
+      this.orbitRadius = orbitRadius;
+    }
   }
 
   return (
@@ -296,13 +343,13 @@ if (!p5.mouseIsPressed && selectedItem) {
 
       {/* Wadah Proton, Elektron, Neutron */}
       <div
-        className="absolute w-full flex justify-center bottom-16 space-x-10"
+        className="absolute w-full flex justify-center bottom-1 space-x-10 "
         style={{
           zIndex: 0,
         }}
       >
         {items.map((item) => (
-          <div key={item.type} className="relative flex flex-col items-center">
+          <div key={item.type} className="relative flex flex-col items-center top-20 ml-5">
             <div
               style={{
                 width: "100px",
@@ -314,14 +361,16 @@ if (!p5.mouseIsPressed && selectedItem) {
                 marginBottom: "20px",
               }}
             ></div>
-            <h2 className="text-white text-xl font-bold">{item.label}</h2>
+            <h2 className="text-white text-xl font-bold mb-4">{item.label}</h2>
+            {/* Tambahkan CountAtom di bawah elemen h2 */}
+            <CountAtom  className="" onUpdate={(type, value) => console.log(`${type} updated to ${value}`)} />
           </div>
         ))}
       </div>
 
       {/* Elemen Proton, Elektron, dan Neutron */}
       <div
-        className="absolute w-full flex justify-center items-center space-x-10 gap-10 mb-5 ml-5"
+        className="flex justify-center items-center center absolute mb-4 spacex-8 gap-20 ml-8" 
         style={{
           bottom: 110,
           zIndex: 1,
@@ -330,7 +379,7 @@ if (!p5.mouseIsPressed && selectedItem) {
         {items.map((item, index) => (
           <div
             key={item.type}
-            className="relative text-center"
+            className="relative text-center mt"
             style={{
               marginLeft: `${index * 35}px`,
               marginRight: `${(items.length - index) * 4}px`,

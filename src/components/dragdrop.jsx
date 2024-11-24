@@ -53,7 +53,7 @@ const DragDropComponent = React.memo(({ onDragStart }) => {
 });
 
 DragDropComponent.propTypes = {
-  onDragStart: PropTypes.func.isRequired,
+  // onDragStart: PropTypes.func.isRequired,
 };
 
 export default DragDropComponent;
