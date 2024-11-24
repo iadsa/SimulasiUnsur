@@ -6,7 +6,6 @@ import neutronImg from "../assets/neutron.png";
 import wadahImg from "../assets/wadah.png";
 import CountAtom from "./countatom";
 
-
 const ParticlesComponent = () => {
   const [droppedItems, setDroppedItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -28,15 +27,15 @@ const ParticlesComponent = () => {
     neutron: 0,
     elektron: 0,
   });
-  
+
   const handleUpdateCounts = (type, value) => {
     setCounts((prev) => ({ ...prev, [type]: value }));
   };
-  
+
   useEffect(() => {
     // Perbarui droppedItems untuk mencocokkan jumlah partikel
     const updatedItems = [];
-  
+
     // Tambahkan proton
     for (let i = 0; i < counts.proton; i++) {
       updatedItems.push({
@@ -45,7 +44,7 @@ const ParticlesComponent = () => {
         y: center.current.y + Math.random() * 20 - 10,
       });
     }
-  
+
     // Tambahkan neutron
     for (let i = 0; i < counts.neutron; i++) {
       updatedItems.push({
@@ -54,14 +53,14 @@ const ParticlesComponent = () => {
         y: center.current.y + Math.random() * 20 - 10,
       });
     }
-  
+
     // Tambahkan elektron
     const orbitRadii = [
       circleRadius.current,
       circleRadius.current * 0.75,
       circleRadius.current * 0.5,
     ];
-  
+
     for (let i = 0; i < counts.elektron; i++) {
       const radius = orbitRadii[i % orbitRadii.length];
       const angle = (Math.PI * 2 * i) / counts.elektron;
@@ -71,11 +70,9 @@ const ParticlesComponent = () => {
         y: center.current.y + radius * Math.sin(angle),
       });
     }
-  
+
     setDroppedItems(updatedItems);
   }, [counts, center, circleRadius]);
-  
-
 
   useEffect(() => {
     const loadImages = (p5) => {
@@ -109,7 +106,7 @@ const ParticlesComponent = () => {
     if (data === "proton" || data === "neutron") {
       if (distanceFromCenter > circleRadius.current / 2) {
         // remove item from dropped items
-        console.log("REMOVING")
+        console.log("REMOVING");
         const updatedItems = droppedItems.filter((item) => item.type !== data);
         setDroppedItems(updatedItems);
         return; // Proton/Neutron hanya boleh di pusat lingkaran
@@ -127,7 +124,7 @@ const ParticlesComponent = () => {
       let closestRadius = orbitRadii[0];
       orbitRadii.forEach((radius) => {
         if (
-          Math.abs(distanceFromCenter - radius) < 
+          Math.abs(distanceFromCenter - radius) <
           Math.abs(distanceFromCenter - closestRadius)
         ) {
           closestRadius = radius;
@@ -139,8 +136,8 @@ const ParticlesComponent = () => {
         distanceFromCenter,
         offsetX,
         offsetY,
-        center: center.current
-      })
+        center: center.current,
+      });
 
       const angle = Math.atan2(
         offsetY - center.current.y,
@@ -229,7 +226,11 @@ const ParticlesComponent = () => {
           p5.mouseY >= item.y - 15 &&
           p5.mouseY <= item.y + 15
         ) {
-          setSelectedItem({ index, offsetX: p5.mouseX - item.x, offsetY: p5.mouseY - item.y });
+          setSelectedItem({
+            index,
+            offsetX: p5.mouseX - item.x,
+            offsetY: p5.mouseY - item.y,
+          });
         }
       }
     });
@@ -243,7 +244,7 @@ const ParticlesComponent = () => {
       const item = droppedItems[index];
       const distanceFromCenter = Math.sqrt(
         Math.pow(newX - center.current.x, 2) +
-        Math.pow(newY - center.current.y, 2)
+          Math.pow(newY - center.current.y, 2)
       );
 
       if (item.type === "proton" || item.type === "neutron") {
@@ -292,7 +293,7 @@ const ParticlesComponent = () => {
       setSelectedItem(null);
     }
   };
-  
+
   const windowResized = (p5) => {
     p5.resizeCanvas(p5.windowWidth, p5.windowHeight * 0.5);
     const newCenter = { x: p5.width / 2, y: p5.height / 2 };
@@ -305,16 +306,27 @@ const ParticlesComponent = () => {
     // Adjust positions of dropped items
     setDroppedItems((prevItems) =>
       prevItems.map((item) => {
-        const angle = Math.atan2(item.y - center.current.y, item.x - center.current.x);
+        const angle = Math.atan2(
+          item.y - center.current.y,
+          item.x - center.current.x
+        );
         const distanceFromCenter = Math.sqrt(
           Math.pow(item.x - center.current.x, 2) +
-          Math.pow(item.y - center.current.y, 2)
+            Math.pow(item.y - center.current.y, 2)
         );
 
         let newX, newY;
         if (item.type === "proton" || item.type === "neutron") {
-          newX = center.current.x + (distanceFromCenter / circleRadius.current) * newCircleRadius * Math.cos(angle);
-          newY = center.current.y + (distanceFromCenter / circleRadius.current) * newCircleRadius * Math.sin(angle);
+          newX =
+            center.current.x +
+            (distanceFromCenter / circleRadius.current) *
+              newCircleRadius *
+              Math.cos(angle);
+          newY =
+            center.current.y +
+            (distanceFromCenter / circleRadius.current) *
+              newCircleRadius *
+              Math.sin(angle);
         } else if (item.type === "elektron") {
           const orbitRadii = [
             newCircleRadius, // Lingkaran luar
@@ -343,7 +355,11 @@ const ParticlesComponent = () => {
 
     particles.current.forEach((particle) => {
       const newOrbitRadius = p5.random(100, circleRadius.current);
-      particle.updateProperties(center.current.x, center.current.y, newOrbitRadius);
+      particle.updateProperties(
+        center.current.x,
+        center.current.y,
+        newOrbitRadius
+      );
     });
   };
 
@@ -403,7 +419,7 @@ const ParticlesComponent = () => {
         }}
       >
         {items.map((item) => (
-          <div key={item.type} className="relative flex flex-col items-center top-20 ml-5">
+          <div key={item.type} className="relative flex flex-col items-center">
             <div
               style={{
                 width: "100px",
@@ -418,15 +434,17 @@ const ParticlesComponent = () => {
             <h2 className="text-white text-xl font-bold mb-4">{item.label}</h2>
             {/* Tambahkan CountAtom di bawah elemen h2 */}
             <CountAtom
-            onUpdate={(type, value) => handleUpdateCounts(type, value)}
-                />
+              type={item.type}
+              value={counts[item.type]}
+              onUpdate={(type, value) => handleUpdateCounts(type, value)}
+            />
           </div>
         ))}
       </div>
 
       {/* Elemen Proton, Elektron, dan Neutron */}
       <div
-        className="flex justify-center items-center center absolute mb-4 spacex-8 gap-20 ml-8" 
+        className="flex justify-center items-center center absolute gap-20 ml-14 mr-9 mb-2"
         style={{
           bottom: 110,
           zIndex: 1,
