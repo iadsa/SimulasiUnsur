@@ -430,7 +430,7 @@ const ParticlesComponent = () => {
           borderRadius: "15px",
           // boxShadow: "0 0 20px 5px #C0C0C0",
           left: "10%",
-          top: "6%",
+          top: "2%",
           fontSize: "18px",
           fontFamily: "Inter",
         }}
@@ -444,11 +444,12 @@ const ParticlesComponent = () => {
 
       {/* Kotak Unsur */}
       <div
-        className="absolute top-1/4 right-24 transform -translate-y-1/2 -translate-x-24 border-2 rounded-lg mr-10 mb-10"
+        className="absolute top-1/4 right-24 transform -translate-y-1/2 -translate-x-24 border-2 rounded-lg mr-10 mb-10 mt-10"
         style={{
           borderRadius: "15px",
           // boxShadow: "0 0 20px 5px #C0C0C0",
           right: "-2%",
+         
           fontFamily: "Inter",
         }}
       >

@@ -1,6 +1,6 @@
 export const getUnsurData = async () => {
   try {
-    const response = await fetch("../api/tabelperiodik.json"); // Path relatif ke file JSON
+    const response = await fetch(`/SimulasiUnsur/api/tabelperiodik.json`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

@@ -77,7 +77,7 @@ const Unsur = ({ atomicNumber }) => {
     <div
       className="rounded-lg"
       style={{
-        width: "450px",
+        width: "350px",
         backgroundColor: "#D9D9D9",
         border: "1px solid #C0C0C0",
         padding: "15px",
