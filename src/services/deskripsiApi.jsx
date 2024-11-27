@@ -1,6 +1,6 @@
 export const getDeskripsiUnsurData = async () => {
     try {
-      const response = await fetch(`/SimulasiUnsur/api/deskripsi.json`);
+      const response = await fetch(`${import.meta.env.BASE_URL}api/deskripsi.json`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

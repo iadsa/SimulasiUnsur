@@ -1,7 +1,7 @@
 export const getImageUnsurData = async () => {
   try {
     
-    const response = await fetch(`/SimulasiUnsur/api/gambarunsur.json`);
+    const response = await fetch(`${import.meta.env.BASE_URL}public/api/gambarunsur.json`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

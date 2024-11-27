@@ -1,6 +1,6 @@
 export const getUnsurData = async () => {
   try {
-    const response = await fetch(`/SimulasiUnsur/api/tabelperiodik.json`);
+    const response = await fetch(`${import.meta.env.BASE_URL}api/tabelperiodik.json`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
