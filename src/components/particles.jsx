@@ -428,9 +428,11 @@ const ParticlesComponent = () => {
         className="absolute top-1/6 left-24 transform -translate-y-1/2 translate-x-0 border-2 rounded-lg ml-10"
         style={{
           borderRadius: "15px",
-          boxShadow: "0 0 20px 5px #C0C0C0",
+          // boxShadow: "0 0 20px 5px #C0C0C0",
           left: "10%",
-          top: "10%",
+          top: "6%",
+          fontSize: "18px",
+          fontFamily: "Inter",
         }}
       >
         <Deskripsi
@@ -445,7 +447,9 @@ const ParticlesComponent = () => {
         className="absolute top-1/4 right-24 transform -translate-y-1/2 -translate-x-24 border-2 rounded-lg mr-10 mb-10"
         style={{
           borderRadius: "15px",
-          boxShadow: "0 0 20px 5px #C0C0C0",
+          // boxShadow: "0 0 20px 5px #C0C0C0",
+          right: "-2%",
+          fontFamily: "Inter",
         }}
       >
         <Unsur

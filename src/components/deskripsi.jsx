@@ -45,7 +45,7 @@ const Deskripsi = ({ atomicNumber }) => {
         border: "1px solid #C0C0C0",
         padding: "15px",
         boxSizing: "border-box",
-        boxShadow: "0 0 20px 5px #C0C0C0",
+        // boxShadow: "0 0 20px 5px #C0C0C0",
         overflow: "hidden",
       }}
     >

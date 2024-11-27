@@ -82,7 +82,7 @@ const Unsur = ({ atomicNumber }) => {
         border: "1px solid #C0C0C0",
         padding: "15px",
         boxSizing: "border-box",
-        boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+        // boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
         display: "flex", 
         flexDirection: "row", // Posisi item di sebelah kiri-kanan
         justifyContent: "space-between", // Memisahkan gambar dan teks
@@ -103,6 +103,9 @@ const Unsur = ({ atomicNumber }) => {
         <p><strong>Titik Didih:</strong> {boilingPoint || "N/A"} K</p>
         <p><strong>Golongan:</strong> {groupBlock || "N/A"}</p>
         <p><strong>Jumlah Proton:</strong> {noAtom}</p>
+        <p>Jumlah Proton, Elektron, Neutron</p>
+        <p><strong>Harus Berjumlah Sama</strong></p>
+        <p>Agar Unsur Stabil</p>
       </div>
       
       {/* Gambar di sebelah kanan */}
