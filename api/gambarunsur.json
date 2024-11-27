@@ -1,0 +1,597 @@
+[
+    {
+        "atomicNumber": "1",
+        "name": "Hydrogen",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Hydrogenglow.jpg"
+    },
+    {
+        "atomicNumber": "2",
+        "name": "Helium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Helium-glow.jpg"
+    },
+    {
+        "atomicNumber": "3",
+        "name": "Lithium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/0.5_grams_lithium_under_argon.jpg"
+    },
+    {
+        "atomicNumber": "4",
+        "name": "Beryllium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Beryllium_%28Be%29.jpg"
+    },
+    {
+        "atomicNumber": "5",
+        "name": "Boron",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Boron.jpg"
+    },
+    {
+        "atomicNumber": "6",
+        "name": "Carbon",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/6/68/Pure_Carbon.png"
+    },
+    {
+        "atomicNumber": "7",
+        "name": "Nitrogen",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Nitrogen-glow.jpg"
+    },
+    {
+        "atomicNumber": "8",
+        "name": "Oxygen",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Liquid_oxygen_in_a_beaker_%28cropped_and_retouched%29.jpg"
+    },
+    {
+        "atomicNumber": "9",
+        "name": "Fluorine",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Fluoro_liquido_a_-196%C2%B0C_1.jpg"
+    },
+    {
+        "atomicNumber": "10",
+        "name": "Neon",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Neon-glow.jpg"
+    },
+    {
+        "atomicNumber": "11",
+        "name": "Sodium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/2/27/Na_%28Sodium%29.jpg"
+    },
+    {
+        "atomicNumber": "12",
+        "name": "Magnesium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Magnesium_crystals.jpg"
+    },
+    {
+        "atomicNumber": "13",
+        "name": "Aluminium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Aluminium.jpg"
+    },
+    {
+        "atomicNumber": "14",
+        "name": "Silicon",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Silicon.jpg"
+    },
+    {
+        "atomicNumber": "15",
+        "name": "Phosphorus",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Phosphorus-purple.jpg"
+    },
+    {
+        "atomicNumber": "16",
+        "name": "Sulfur",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/2/23/Native_sulfur_%28Vodinskoe_Deposit%3B_quarry_near_Samara%2C_Russia%29_9.jpg"
+    },
+    {
+        "atomicNumber": "17",
+        "name": "Chlorine",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Chlorine-sample-flip.jpg"
+    },
+    {
+        "atomicNumber": "18",
+        "name": "Argon",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Argon-glow.jpg"
+    },
+    {
+        "atomicNumber": "19",
+        "name": "Potassium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Potassium.JPG"
+    },
+    {
+        "atomicNumber": "20",
+        "name": "Calcium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/7/72/Calcium.jpg"
+    },
+    {
+        "atomicNumber": "21",
+        "name": "Scandium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Scandium%2C_Sc.jpg"
+    },
+    {
+        "atomicNumber": "22",
+        "name": "Titanium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Titanium.jpg"
+    },
+    {
+        "atomicNumber": "23",
+        "name": "Vanadium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Vanadium-pieces.jpg"
+    },
+    {
+        "atomicNumber": "24",
+        "name": "Chromium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Chromium.jpg"
+    },
+    {
+        "atomicNumber": "25",
+        "name": "Manganese",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/6/64/Manganese_element.jpg"
+    },
+    {
+        "atomicNumber": "26",
+        "name": "Iron",
+        "image.url": "https://images-of-elements.com/iron-2.jpg"
+    },
+    {
+        "atomicNumber": "27",
+        "name": "Cobalt",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/6/62/Cobalt_ore_2.jpg"
+    },
+    {
+        "atomicNumber": "28",
+        "name": "Nickel",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/5/57/Nickel_chunk.jpg"
+    },
+    {
+        "atomicNumber": "29",
+        "name": "Copper",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/NatCopper.jpg"
+    },
+    {
+        "atomicNumber": "30",
+        "name": "Zinc",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Zinc_%2830_Zn%29.jpg"
+    },
+    {
+        "atomicNumber": "31",
+        "name": "Gallium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Solid_gallium_%28Ga%29.jpg"
+    },
+    {
+        "atomicNumber": "32",
+        "name": "Germanium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/0/08/Polycrystalline-germanium.jpg"
+    },
+    {
+        "atomicNumber": "33",
+        "name": "Arsenic",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Arsenic_%2833_As%29.jpg"
+    },
+    {
+        "atomicNumber": "34",
+        "name": "Selenium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Selenium.jpg"
+    },
+    {
+        "atomicNumber": "35",
+        "name": "Bromine",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Bromine-ampoule.jpg"
+    },
+    {
+        "atomicNumber": "36",
+        "name": "Krypton",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Krypton-glow.jpg"
+    },
+    {
+        "atomicNumber": "37",
+        "name": "Rubidium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Rb5.JPG"
+    },
+    {
+        "atomicNumber": "38",
+        "name": "Strontium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Strontium-1.jpg"
+    },
+    {
+        "atomicNumber": "39",
+        "name": "Yttrium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/9/90/Piece_of_Yttrium.jpg"
+    },
+    {
+        "atomicNumber": "40",
+        "name": "Zirconium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Zirconium-pieces.jpg"
+    },
+    {
+        "atomicNumber": "41",
+        "name": "Niobium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Niobium_strips.JPG"
+    },
+    {
+        "atomicNumber": "42",
+        "name": "Molybdenum",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Molybdenum.jpg"
+    },
+    {
+        "atomicNumber": "43",
+        "name": "Technetium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Technetium-sample-cropped.jpg"
+    },
+    {
+        "atomicNumber": "44",
+        "name": "Ruthenium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Ruthenium_crystal.jpg"
+    },
+    {
+        "atomicNumber": "45",
+        "name": "Rhodium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/5/54/Rhodium_%28Rh%29.jpg"
+    },
+    {
+        "atomicNumber": "46",
+        "name": "Palladium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Palladium_%2846_Pd%29.jpg"
+    },
+    {
+        "atomicNumber": "47",
+        "name": "Silver",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Silver-nugget.jpg"
+    },
+    {
+        "atomicNumber": "48",
+        "name": "Cadmium",
+        "image.url": "https://images-of-elements.com/cadmium-4.jpg"
+    },
+    {
+        "atomicNumber": "49",
+        "name": "Indium",
+        "image.url": "https://images-of-elements.com/indium-2.jpg"
+    },
+    {
+        "atomicNumber": "50",
+        "name": "Tin",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Tin-2.jpg"
+    },
+    {
+        "atomicNumber": "51",
+        "name": "Antimony",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Antimony-4.jpg"
+    },
+    {
+        "atomicNumber": "52",
+        "name": "Tellurium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Tellurium2.jpg"
+    },
+    {
+        "atomicNumber": "53",
+        "name": "Iodine",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Iodine-sample.jpg"
+    },
+    {
+        "atomicNumber": "54",
+        "name": "Xenon",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Xenon-glow.jpg"
+    },
+    {
+        "atomicNumber": "55",
+        "name": "Cesium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Cesium.jpg"
+    },
+    {
+        "atomicNumber": "56",
+        "name": "Barium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Barium_%2856_Ba%29.jpg"
+    },
+    {
+        "atomicNumber": "57",
+        "name": "Lanthanum",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Lanthanum.jpg"
+    },
+    {
+        "atomicNumber": "58",
+        "name": "Cerium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Cerium2.jpg"
+    },
+    {
+        "atomicNumber": "59",
+        "name": "Praseodymium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Praseodymium.jpg"
+    },
+    {
+        "atomicNumber": "60",
+        "name": "Neodymium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Neodymium_%2860_Nd%29.jpg"
+    },
+    {
+        "atomicNumber": "61",
+        "name": "Promethium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Promethium.jpg"
+    },
+    {
+        "atomicNumber": "62",
+        "name": "Samarium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/8/88/Samarium-2.jpg"
+    },
+    {
+        "atomicNumber": "63",
+        "name": "Europium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Europium.jpg"
+    },
+    {
+        "atomicNumber": "64",
+        "name": "Gadolinium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Gadolinium-2.jpg"
+    },
+    {
+        "atomicNumber": "65",
+        "name": "Terbium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Terbium-2.jpg"
+    },
+    {
+        "atomicNumber": "66",
+        "name": "Dysprosium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Dysprosium-2.jpg"
+    },
+    {
+        "atomicNumber": "67",
+        "name": "Holmium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Holmium2.jpg"
+    },
+    {
+        "atomicNumber": "68",
+        "name": "Erbium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Erbium-2.jpg"
+    },
+    {
+        "atomicNumber": "69",
+        "name": "Thulium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Thulium-2.jpg"
+    },
+    {
+        "atomicNumber": "70",
+        "name": "Ytterbium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Ytterbium-3.jpg"
+    },
+    {
+        "atomicNumber": "71",
+        "name": "Lutetium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Lutetium.jpg"
+    },
+    {
+        "atomicNumber": "72",
+        "name": "Hafnium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/1/17/Hafnium_%2872_Hf%29.jpg"
+    },
+    {
+        "atomicNumber": "73",
+        "name": "Tantalum",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/6/61/Tantalum.jpg"
+    },
+    {
+        "atomicNumber": "74",
+        "name": "Tungsten",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Tungsten_rod_with_oxidised_surface.jpg"
+    },
+    {
+        "atomicNumber": "75",
+        "name": "Rhenium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Pure_rhenium_bead%2C_arc_melted%2C_21_grams._Original_size_in_cm_-_1.5_x_1.7.jpg"
+    },
+    {
+        "atomicNumber": "76",
+        "name": "Osmium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Osmium-bead.jpg"
+    },
+    {
+        "atomicNumber": "77",
+        "name": "Iridium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Iridium-2.jpg"
+    },
+    {
+        "atomicNumber": "78",
+        "name": "Platinum",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/6/68/Platinum_crystals.jpg"
+    },
+    {
+        "atomicNumber": "79",
+        "name": "Gold",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Gold_%2879_Au%29.jpg"
+    },
+    {
+        "atomicNumber": "80",
+        "name": "Mercury",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/b/be/Hydrargyrum_%2880_Hg%29.jpg"
+    },
+    {
+        "atomicNumber": "81",
+        "name": "Thallium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Thallium_%2881_Tl%29.jpg"
+    },
+    {
+        "atomicNumber": "82",
+        "name": "Lead",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/6/63/Lead-2.jpg"
+    },
+    {
+        "atomicNumber": "83",
+        "name": "Bismuth",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Bismuth-2.jpg"
+    },
+    {
+        "atomicNumber": "84",
+        "name": "Polonium",
+        "image.url": "https://images-of-elements.com/polonium.jpg"
+    },
+    {
+        "atomicNumber": "85",
+        "name": "Astatine",
+        "image.url": "https://images-of-elements.com/astatine.jpg"
+    },
+    {
+        "atomicNumber": "86",
+        "name": "Radon",
+        "image.url": "https://images-of-elements.com/radon.jpg"
+    },
+    {
+        "atomicNumber": "87",
+        "name": "Francium",
+        "image.url": "https://images-of-elements.com/francium.jpg"
+    },
+    {
+        "atomicNumber": "88",
+        "name": "Radium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Radium226.jpg"
+    },
+    {
+        "atomicNumber": "89",
+        "name": "Actinium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/2/27/Actinium_sample_%2831481701837%29.png"
+    },
+    {
+        "atomicNumber": "90",
+        "name": "Thorium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Thorium-1.jpg"
+    },
+    {
+        "atomicNumber": "91",
+        "name": "Protactinium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/a/af/Protactinium-233.jpg"
+    },
+    {
+        "atomicNumber": "92",
+        "name": "Uranium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Ames_Process_uranium_biscuit.jpg"
+    },
+    {
+        "atomicNumber": "93",
+        "name": "Neptunium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Neptunium2.jpg"
+    },
+    {
+        "atomicNumber": "94",
+        "name": "Plutonium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Plutonium_ring.jpg"
+    },
+    {
+        "atomicNumber": "95",
+        "name": "Americium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Americium_microscope.jpg"
+    },
+    {
+        "atomicNumber": "96",
+        "name": "Curium",
+        "image.url": "https://images-of-elements.com/s/curium-glow.jpg"
+    },
+    {
+        "atomicNumber": "97",
+        "name": "Berkelium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Berkelium.jpg"
+    },
+    {
+        "atomicNumber": "98",
+        "name": "Californium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/9/93/Californium.jpg"
+    },
+    {
+        "atomicNumber": "99",
+        "name": "Einsteinium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Einsteinium.jpg"
+    },
+    {
+        "atomicNumber": "100",
+        "name": "Fermium",
+        "image.url": "https://upload.wikimedia.org/wikipedia/commons/5/58/Ivy_Mike_-_mushroom_cloud.jpg"
+    },
+    {
+        "atomicNumber": "101",
+        "name": "Mendelevium",
+        "image.url": "https://images-of-elements.com/s/mendelevium.jpg"
+    },
+    {
+        "atomicNumber": "102",
+        "name": "Nobelium",
+        "image.url": "https://images-of-elements.com/nobelium.jpg"
+    },
+    {
+        "atomicNumber": "103",
+        "name": "Lawrencium",
+        "image.url": "https://images-of-elements.com/lawrencium.jpg"
+    },
+    {
+        "atomicNumber": "104",
+        "name": "Rutherfordium",
+        "image.url": "https://images-of-elements.com/s/rutherfordium.jpg"
+    },
+    {
+        "atomicNumber": "105",
+        "name": "Dubnium",
+        "image.url": "https://images-of-elements.com/s/transactinoid.png"
+    },
+    {
+        "atomicNumber": "106",
+        "name": "Seaborgium",
+        "image.url": "https://images-of-elements.com/s/transactinoid.png"
+    },
+    {
+        "atomicNumber": "107",
+        "name": "Bohrium",
+        "image.url": "https://images-of-elements.com/s/transactinoid.png"
+    },
+    {
+        "atomicNumber": "108",
+        "name": "Hassium",
+        "image.url": "https://images-of-elements.com/s/transactinoid.png"
+    },
+    {
+        "atomicNumber": "109",
+        "name": "Meitnerium",
+        "image.url": "https://images-of-elements.com/s/transactinoid.png"
+    },
+    {
+        "atomicNumber": "110",
+        "name": "Darmstadtium",
+        "image.url": "https://images-of-elements.com/s/transactinoid.png"
+    },
+    {
+        "atomicNumber": "111",
+        "name": "Roentgenium",
+        "image.url": "https://images-of-elements.com/s/transactinoid.png"
+    },
+    {
+        "atomicNumber": "112",
+        "name": "Copernicium",
+        "image.url": "https://images-of-elements.com/s/transactinoid.png"
+    },
+    {
+        "atomicNumber": "113",
+        "name": "Nihonium",
+        "image.url": "https://images-of-elements.com/s/transactinoid.png"
+    },
+    {
+        "atomicNumber": "114",
+        "name": "Flerovium",
+        "image.url": "https://images-of-elements.com/s/transactinoid.png"
+    },
+    {
+        "atomicNumber": "115",
+        "name": "Moscovium",
+        "image.url": "https://images-of-elements.com/s/transactinoid.png"
+    },
+    {
+        "atomicNumber": "116",
+        "name": "Livermorium",
+        "image.url": "https://images-of-elements.com/s/transactinoid.png"
+    },
+    {
+        "atomicNumber": "117",
+        "name": "Tennessine",
+        "image.url": "https://images-of-elements.com/s/transactinoid.png"
+    },
+    {
+        "atomicNumber": "118",
+        "name": "Oganesson",
+        "image.url": "https://images-of-elements.com/s/transactinoid.png"
+    },
+    {
+        "atomicNumber": "119",
+        "name": "Ununennium",
+        "image.url": "https://images-of-elements.com/s/transactinoid.png"
+    }
+]
