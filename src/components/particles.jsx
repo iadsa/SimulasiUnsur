@@ -498,10 +498,11 @@ const ParticlesComponent = () => {
 
       {/* Elemen Proton, Elektron, dan Neutron */}
       <div
-        className="flex justify-center items-center center absolute gap-20 ml-14 mr-9 mb-1"
+        className="flex justify-center items-center center absolute gap-20 ml-14 mr-10 mt-10 -mb-2"
         style={{
           bottom: 110,
           zIndex: 1,
+          button: "15px",
         }}
       >
         {items.map((item, index) => (
