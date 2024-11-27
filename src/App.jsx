@@ -4,7 +4,7 @@ import DragDropComponent from "./components/dragdrop.jsx";
 import Header from "./components/header.jsx";
 
 function App() {
-  const scale = 0.85; // Skala otomatis (85%)
+  const scale = 0.90; // Skala otomatis (85%)
 
   // Perhitungan otomatis untuk width dan height
   const scaleStyle = {
@@ -32,11 +32,7 @@ function App() {
       </div>
 
       {/* Drag and Drop */}
-      <div className="w-full flex justify-center mt-4 z-10 mt-30"
-      style={{
-        
-      }}
-      
+      <div className="w-full flex justify-center mt-4 z-10 mt-20"      
       >
         <DragDropComponent />
       </div>
