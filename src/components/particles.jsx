@@ -38,8 +38,12 @@ const ParticlesComponent = () => {
     elektron: 0,
   });
 
-  const handleUpdateCounts = (type, value) => {
-    setCounts((prev) => ({ ...prev, [type]: value }));
+
+  const updateParticleCounts = (type, delta) => {
+    setCounts((prevCounts) => {
+      const newValue = Math.max(0, prevCounts[type] + delta);
+      return { ...prevCounts, [type]: newValue };
+    });
   };
 
   useEffect(() => {
@@ -115,12 +119,16 @@ const ParticlesComponent = () => {
     // Logika untuk Proton dan Neutron
     if (data === "proton" || data === "neutron") {
       if (distanceFromCenter > circleRadius.current / 2) {
-        // remove item from dropped items
-        console.log("REMOVING");
-        const updatedItems = droppedItems.filter((item) => item.type !== data);
-        setDroppedItems(updatedItems);
-        return; // Proton/Neutron hanya boleh di pusat lingkaran
+        console.log("Proton/Neutron hanya boleh berada di pusat lingkaran");
+        return; // Proton atau Neutron hanya diperbolehkan di tengah
       }
+
+      setDroppedItems((prev) => [
+        ...prev,
+        { type: data, x: offsetX, y: offsetY },
+      ]);
+      updateParticleCounts(data, 1); // Tambahkan 1 untuk jenis partikel ini
+      return;
     }
 
     // Logika untuk Elektron
@@ -131,6 +139,7 @@ const ParticlesComponent = () => {
         circleRadius.current * 0.5, // Lingkaran kecil
       ];
 
+      // Cari radius lingkaran terdekat
       let closestRadius = orbitRadii[0];
       orbitRadii.forEach((radius) => {
         if (
@@ -139,14 +148,6 @@ const ParticlesComponent = () => {
         ) {
           closestRadius = radius;
         }
-      });
-
-      console.log({
-        closestRadius,
-        distanceFromCenter,
-        offsetX,
-        offsetY,
-        center: center.current,
       });
 
       const angle = Math.atan2(
@@ -160,14 +161,16 @@ const ParticlesComponent = () => {
         ...prev,
         { type: data, x: snappedX, y: snappedY },
       ]);
+      updateParticleCounts(data, 1); // Tambahkan 1 untuk elektron
       return;
     }
 
-    // Tambahkan Proton atau Neutron
+    // Tambahkan partikel lainnya secara default
     setDroppedItems((prev) => [
       ...prev,
       { type: data, x: offsetX, y: offsetY },
     ]);
+    updateParticleCounts(data, 1); // Tambahkan 1 untuk jenis partikel ini
   };
 
   const onDragStart = (e, itemType) => {
@@ -464,7 +467,10 @@ const ParticlesComponent = () => {
             <CountAtom
               type={item.type}
               value={counts[item.type]}
-              onUpdate={(type, value) => handleUpdateCounts(type, value)}
+              onUpdate={(type, value) => {
+                const delta = value - counts[type];
+                updateParticleCounts(type, delta);
+              }}
             />
           </div>
         ))}
