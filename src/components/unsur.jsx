@@ -47,7 +47,7 @@ const Unsur = ({ atomicNumber }) => {
   }
 
   if (!unsur) {
-    return <p>Loading...</p>;
+    return <p></p>;
   }
 
   const image = elements.find((element) => String(element.atomicNumber) === String(atomicNumber))?.["image.url"];
@@ -103,13 +103,6 @@ const Unsur = ({ atomicNumber }) => {
         <p><strong>Titik Didih:</strong> {boilingPoint || "N/A"} K</p>
         <p><strong>Golongan:</strong> {groupBlock || "N/A"}</p>
         <p><strong>Jumlah Proton:</strong> {noAtom}</p>
-        <p><strong>Jumlah Neutron:</strong> {jumlahNeutron}</p>
-        <p><strong>Jumlah Elektron:</strong> {jumlahElektron}</p>
-        
-        {/* Kategori Isotop, Isobar, Stabil */}
-        <p><strong>Isotop:</strong> {isIsotop}</p>
-        <p><strong>Isobar:</strong> {isIsobar}</p>
-        <p><strong>Status:</strong> {isStable}</p>
       </div>
       
       {/* Gambar di sebelah kanan */}

@@ -6,7 +6,7 @@ import neutronImg from "../assets/neutron.png";
 import wadahImg from "../assets/wadah.png";
 import CountAtom from "./countatom";
 import Unsur from "../components/unsur";
-
+import Deskripsi from "../components/deskripsi";
 const ParticlesComponent = () => {
   const [droppedItems, setDroppedItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -38,7 +38,6 @@ const ParticlesComponent = () => {
     elektron: 0,
   });
 
-
   const updateParticleCounts = (type, delta) => {
     setCounts((prevCounts) => {
       const newValue = Math.max(0, prevCounts[type] + delta);
@@ -54,7 +53,7 @@ const ParticlesComponent = () => {
     for (let i = 0; i < counts.proton; i++) {
       updatedItems.push({
         type: "proton",
-        x: center.current.x + Math.random() * 20 - 10, // Posisi acak di pusat
+        x: center.current.x + Math.random() * 20 - 10,
         y: center.current.y + Math.random() * 20 - 10,
       });
     }
@@ -423,6 +422,23 @@ const ParticlesComponent = () => {
     >
       {/* Partikel di tengah */}
       <Sketch setup={setup} draw={draw} windowResized={windowResized} />
+
+      {/* Kotak Deskirpsi */}
+      <div
+        className="absolute top-1/6 left-24 transform -translate-y-1/2 translate-x-0 border-2 rounded-lg ml-10"
+        style={{
+          borderRadius: "15px",
+          boxShadow: "0 0 20px 5px #C0C0C0",
+          left: "10%",
+          top: "10%",
+        }}
+      >
+        <Deskripsi
+          atomicNumber={calculateAtomicNumber()}
+          massNumber={calculateMassNumber()}
+          electrons={counts.elektron}
+        />
+      </div>
 
       {/* Kotak Unsur */}
       <div
